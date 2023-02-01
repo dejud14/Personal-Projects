@@ -5,10 +5,10 @@ import os
 import random
 pygame.font.init()
 # Window has width 600 and height 800
-WIND_WIDTH = 575
+WIND_WIDTH = 550
 WIND_HEIGHT = 800
 
-GEN = 0
+GEN = -1
 
 # Importing images
 BIRD_IMG = [pygame.transform.scale2x(pygame.image.load(os.path.join("imgs", "b1.png"))), pygame.transform.scale2x(pygame.image.load(os.path.join("imgs", "b2.png"))), pygame.transform.scale2x(pygame.image.load(os.path.join("imgs", "b3.png")))]
@@ -20,9 +20,9 @@ STAT_FONT = pygame.font.SysFont("comicsans", 50)
 class Bird:
     # Bird behaviour constants
     IMG = BIRD_IMG
-    M_ROTATION = 25
-    ROT_SPEED = 20
-    ANIMATION_t = 3
+    M_ROTATION = 5
+    ROT_SPEED = 5
+    ANIMATION_t = 2
 
     def __init__(self, x, y):
         self.x = x
@@ -194,14 +194,14 @@ def Neural_Eval(genomes, config):
         genome.append(g)
 
     base = Base(730)
-    pipes = [Pipe(575)]
+    pipes = [Pipe(550)]
     win = pygame.display.set_mode((WIND_WIDTH, WIND_HEIGHT))
     clock = pygame.time.Clock()
 
     score = 0
     run = True
     while run:
-        clock.tick(30)
+        clock.tick(35)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False 
@@ -251,8 +251,8 @@ def Neural_Eval(genomes, config):
             score += 1
             # Reward birds that mke it through pipe
             for g in genome:
-                g.fitness += 1
-            pipes.append(Pipe(575))
+                g.fitness += 5
+            pipes.append(Pipe(550))
         for r in removed_pipes:
             pipes.remove(r)
 
